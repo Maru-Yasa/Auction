@@ -6,11 +6,11 @@
             <div class="page-inner py-5">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold">Users</h2>
-                        <h5 class="text-white op-7 mb-2">Manage data users</h5>
+                        <h2 class="text-white pb-2 fw-bold">Items</h2>
+                        <h5 class="text-white op-7 mb-2">Manage data items</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-round"> <span class="btn-label"><i class="fas fa-plus"></i></span> Add new users</a>
+                        <a href="{{ route('items.create') }}" class="btn btn-primary btn-round"> <span class="btn-label"><i class="fas fa-plus"></i></span> Add new items</a>
                     </div>
                 </div>
             </div>
@@ -31,31 +31,28 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <td>No</td>
-                            <td>Username</td>
                             <td>Name</td>
-                            <td>Phone number</td>
-                            <td>Role</td>
+                            <td>Start Price</td>
+                            <td>Image</td>
                             <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
     
-                        @foreach ($data as $user)
+                        @foreach ($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td class="d-flex align-items-center">
-                                    <div class="avatar-sm mr-3">
-                                        <img src="{{ Avatar::create($user->name)->toBase64() }}" alt="..." class="avatar-img rounded-circle">
-                                    </div>    
-                                    {{ $user->username }}
+                                <td>{{ $item->name }}</td>
+                                <td>@currency($item->start_price)</td>
+                                <td class="">
+                                    <div class="p-3">
+                                        <img src="{{ url('img/items/'.$item->image) }}" style="max-width: 200px" alt="">
+                                    </div>
                                 </td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->role }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-round mr-2"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                        <a href="{{ route('items.edit', $item->id) }}" class="btn btn-primary btn-round mr-2"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('items.destroy', $item->id) }}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger btn-round"><i class="fas fa-trash"></i></button>

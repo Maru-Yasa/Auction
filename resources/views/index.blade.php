@@ -8,30 +8,79 @@
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                 <div>
                     <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-                    <h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
+                    {{-- <h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5> --}}
                 </div>
                 <div class="ml-md-auto py-2 py-md-0">
-                    <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-                    <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+                    {{-- <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
+                    <a href="#" class="btn btn-secondary btn-round">Add Customer</a> --}}
                 </div>
             </div>
         </div>
     </div>
     <div class="page-inner mt--5">
         <div class="row mt--2">
+
+            <div class="col-md-3">
+                <div class="card card-white full-height position-relative">
+                    <div class="px-3 py-1 border-0" style="bor">
+                        <h1>Users</h1>
+                    </div>
+                    <div class="card-body row justify-content-center align-items-center text-center">
+                        <h1 class="mr-3" style="font-size: 50px;z-index: 99;">{{ $users_count }}</h1> 
+                    </div>
+                    <i class="fa fa-users text-warning" style="font-size: 150px; position: absolute; right: 0;bottom: 0;opacity: 0.3;z-index: 1; "></i>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-white full-height position-relative">
+                    <div class="px-3 py-1 border-0" style="bor">
+                        <h1>Items</h1>
+                    </div>
+                    <div class="card-body row justify-content-center align-items-center text-center">
+                        <h1 class="mr-3" style="font-size: 50px;z-index: 99;">{{ $items_count }}</h1> 
+                    </div>
+                    <i class="fa fa-boxes text-success" style="font-size: 150px; position: absolute; right: 0;bottom: 0;opacity: 0.3;z-index: 1; "></i>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-white full-height position-relative">
+                    <div class="px-3 py-1 border-0" style="bor">
+                        <h1>Auctions</h1>
+                    </div>
+                    <div class="card-body row justify-content-center align-items-center text-center">
+                        <h1 class="mr-3" style="font-size: 50px;z-index: 99;">{{ $auctions_count }}</h1> 
+                    </div>
+                    <i class="fa fa-table text-danger" style="font-size: 150px; position: absolute; right: 0;bottom: 0;opacity: 0.3;z-index: 1; "></i>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-white full-height position-relative">
+                    <div class="px-3 py-1 border-0" style="bor">
+                        <h1>Bids</h1>
+                    </div>
+                    <div class="card-body row justify-content-center align-items-center text-center">
+                        <h1 class="mr-3" style="font-size: 50px;z-index: 99;">{{ $bids_count }}</h1> 
+                    </div>
+                    <i class="fa fa-money-bill text-info" style="font-size: 150px; position: absolute; right: 0;bottom: 0;opacity: 0.3;z-index: 1; "></i>
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="card full-height">
                     <div class="card-body">
                         <div class="card-title">Overall statistics</div>
-                        <div class="card-category">Daily information about statistics in system</div>
+                        <div class="card-category">Information about statistics in system</div>
                         <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
                             <div class="px-2 pb-2 pb-md-0 text-center">
-                                <div id="circles-1"></div>
-                                <h6 class="fw-bold mt-3 mb-0">New Users</h6>
+                                <div id="circles-1">{{ $users_count }}</div>
+                                <h6 class="fw-bold mt-3 mb-0">Users</h6>
                             </div>
                             <div class="px-2 pb-2 pb-md-0 text-center">
-                                <div id="circles-2"></div>
-                                <h6 class="fw-bold mt-3 mb-0">Sales</h6>
+                                <div id="circles-2">{{ $users_count }}</div>
+                                <h6 class="fw-bold mt-3 mb-0">Auctions</h6>
                             </div>
                             <div class="px-2 pb-2 pb-md-0 text-center">
                                 <div id="circles-3"></div>
@@ -525,10 +574,10 @@
     Circles.create({
         id:'circles-1',
         radius:45,
-        value:60,
+        value:100,
         maxValue:100,
         width:7,
-        text: 5,
+        text: "{{ $users_count }}",
         colors:['#f1f1f1', '#FF9E27'],
         duration:400,
         wrpClass:'circles-wrp',
@@ -540,10 +589,10 @@
     Circles.create({
         id:'circles-2',
         radius:45,
-        value:70,
+        value:1000,
         maxValue:100,
         width:7,
-        text: 36,
+        text: "{{ $auctions_count }}",
         colors:['#f1f1f1', '#2BB930'],
         duration:400,
         wrpClass:'circles-wrp',
@@ -555,10 +604,10 @@
     Circles.create({
         id:'circles-3',
         radius:45,
-        value:40,
+        value:100,
         maxValue:100,
         width:7,
-        text: 12,
+        text: "{{ $bids_count }}",
         colors:['#f1f1f1', '#F25961'],
         duration:400,
         wrpClass:'circles-wrp',

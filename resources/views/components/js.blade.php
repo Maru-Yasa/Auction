@@ -35,3 +35,12 @@
 
 	<!-- Atlantis JS -->
 	<script src="/assets/js/atlantis.min.js"></script>
+	<script>
+		$(function() {
+			$.ajaxSetup({
+				headers: {
+				'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		});
+	</script>

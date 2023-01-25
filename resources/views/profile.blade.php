@@ -20,7 +20,7 @@
                         <img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" alt="..." class="avatar-img rounded-circle">
                     </div>
                     <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
-                    <span>Administor</span>
+                    <span>{{ Auth::user()->role }}</span>
                 </div>
             </div>
             <div class="col-md-8 col-12 pe-3">
@@ -38,9 +38,17 @@
                         </div>
             
                         <div class="mb-3">
-                            <label for="">Email :</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" required value="{{ old('email') ?? $user->email }}">
-                            @error('email')
+                            <label for="">Username :</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" required value="{{ old('username') ?? $user->username }}">
+                            @error('username')
+                                <span class="text-danger">{{ $message }}</span>                    
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Phone number :</label>
+                            <input type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" required value="{{ old('phone_number') ?? $user->phone_number }}">
+                            @error('phone_number')
                                 <span class="text-danger">{{ $message }}</span>                    
                             @enderror
                         </div>
@@ -59,7 +67,7 @@
                         <img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" alt="..." class="avatar-img rounded-circle">
                     </div>
                     <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
-                    <span>Administor</span>
+                    <span>{{ Auth::user()->role }}</span>
                 </div>
             </div>
     

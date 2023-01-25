@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+	<title>Auction</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/>
 
@@ -215,7 +215,7 @@
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									{{ Auth::user()->name }}
-									<span class="user-level">Administrator</span>
+									<span class="user-level">{{ Auth::user()->role }}</span>
 									<span class="caret"></span>
 								</span>
 							</a>
@@ -233,6 +233,7 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary ">
+
 						<li class="nav-item @if(Route::is('home')) active @endif">
 							<a href="{{ route('home') }}" class="">
 								<i class="fas fa-home"></i>
@@ -247,19 +248,45 @@
 							</a>
 						</li>
 
-						<li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-							<h4 class="text-section">Master Data</h4>
-						</li>
+						@if (Auth::user()->role === 'admin' || Auth::user()->role === 'staff')
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Master Data</h4>
+							</li>
+						@endif
+						@if (Auth::user()->role === 'admin')
+							<li class="nav-item @if(Route::is('users.index')) active @endif">
+								<a href="{{ route('users.index') }}">
+									<i class="fas fa-users"></i>
+									<p>Users</p>
+								</a>
+							</li>
+						@endif
+						@if (Auth::user()->role === 'admin' || Auth::user()->role === 'staff')
+							<li class="nav-item @if(Route::is('items.index')) active @endif">
+								<a href="{{ route('items.index') }}">
+									<i class="fas fa-boxes"></i>
+									<p>Items</p>
+								</a>
+							</li>
 
-						<li class="nav-item @if(Route::is('users.index')) active @endif">
-							<a href="{{ route('users.index') }}">
-								<i class="fas fa-users"></i>
-								<p>Users</p>
-							</a>
-						</li>
+							<li class="nav-item @if(Route::is('auctions.index')) active @endif">
+								<a href="{{ route('auctions.index') }}">
+									<i class="fas fa-table"></i>
+									<p>Auctions</p>
+								</a>
+							</li>
+
+							<li class="nav-item @if(Route::is('bids.index')) active @endif">
+								<a href="{{ route('bids.index') }}">
+									<i class="fas fa-gavel"></i>
+									<p>Bids</p>
+								</a>
+							</li>
+						@endif
+
 
 						{{-- <li class="nav-section">
 							<span class="sidebar-mini-icon">
@@ -355,42 +382,21 @@
 
 		<div class="main-panel">
 			<div class="content">
-				<div class="page-inner">
-					<div class="page-header">
-						<h4 class="page-title">@yield('title')</h4>
-					</div>
-					<div class="page-category">
-
-
-						@yield('content')
-
-
-					</div>
-				</div>
+				@yield('content')
 			</div>
 			<footer class="footer">
 				<div class="container-fluid">
 					<nav class="pull-left">
 						<ul class="nav">
 							<li class="nav-item">
-								<a class="nav-link" href="https://www.themekita.com">
-									ThemeKita
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
-									Help
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
-									Licenses
+								<a class="nav-link" href="https://maruyasa.site">
+									Maruyasa
 								</a>
 							</li>
 						</ul>
 					</nav>
 					<div class="copyright ml-auto">
-						2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://www.themekita.com">ThemeKita</a>
+						2023, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://maruyasa.site">Maru</a>
 					</div>				
 				</div>
 			</footer>

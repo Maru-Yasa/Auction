@@ -41,14 +41,14 @@ class UserController extends Controller
     {
         $validator = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
+            'username' => [
                 'required',
-                'string',
-                'email',
+                'alpha_dash',
                 'max:255',
                 Rule::unique(User::class),
             ],
             'password' => 'required|min:8',
+            'role' => 'required'
         ]);
 
         $data = $request->except(['_token']);
@@ -93,13 +93,13 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
+            'username' => [
                 'required',
-                'string',
-                'email',
+                'alpha_dash',
                 'max:255',
-                'unique:users,email,' . $user->id,
-            ]
+                'unique:users,username,'. $user->id,
+            ],
+            'role' => 'required'
         ]);
 
         $data = $request->except(['_token']);
@@ -109,7 +109,8 @@ class UserController extends Controller
         } else {
             $user->forceFill([
                 'name' => $request->name,
-                'email' => $request->email,
+                'username' => $request->username,
+                'role' => $request->role
             ])->save();
         }
         return redirect()->route('users.index')->with('success' , 'Success edit data');
@@ -123,7 +124,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->email === auth()->user()->email) {
+        if ($user->username === auth()->user()->username) {
             return redirect()->route('users.index')->with('error', "You can't delete yourself");
         }
         $user->delete();

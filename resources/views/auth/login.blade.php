@@ -16,9 +16,9 @@
                 <form action="{{ route('login') }}" method="POST" action="">
                     @csrf
                     <div class="mb-3 form-group form-floating-label">
-                        <input name="email" id="inputFloatingLabel" type="mail" class="form-control input-border-bottom @error('email') is-invalid @enderror" required="" value="{{ old('email') }}">
-                        <label for="inputFloatingLabel" class="placeholder">Email</label>
-                        @error('email')
+                        <input name="username" id="inputFloatingLabel" type="text" class="form-control input-border-bottom @error('username') is-invalid @enderror" required="" value="{{ old('username') }}">
+                        <label for="inputFloatingLabel" class="placeholder">Username</label>
+                        @error('username')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>

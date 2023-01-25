@@ -19,11 +19,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-
-            'email' => [
+            'phone_number' => 'required|numeric',       
+            'username' => [
                 'required',
-                'string',
-                'email',
+                'alpha_dash',
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
@@ -31,7 +30,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
         $user->forceFill([
             'name' => $input['name'],
-            'email' => $input['email'],
+            'username' => $input['username'],
+            'phone_number' => $input['phone_number']
         ])->save();
     }
 
